@@ -1,0 +1,45 @@
+\section{Statistics}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\subsection{Probability}
+TODO: Probability, CDF, Variance, L_p-Space for Random-Variables, Jensens-Inequality for Random Variables etc.
+
+\subsection{Distributions}
+TODO: All the usual suspects
+
+\subsection{Estimation}
+TODO: ML, Score-Function, biased/unbiased, Cramér–Rao bound
+
+\subsection{Divergences}
+\begin{definition}{Divergence}
+	A divergence is a "sense" of distance between two probability distributions. It's not a metric, but a pre-metric.
+	From \href{https://en.wikipedia.org/wiki/Divergence_(statistics)}{wikipedia}: Suppose $S$ is a space of all probability distributions with common support. Then a divergence on $S$ is a function $D(· || ·): S\timesS \rightarrow R$ satisfying [1]
+	\begin{enumerate}
+		\item $D(p || q) \geq 0 \forall p, q \in S$,
+		\item $D(p || q) = 0 \Leftrightarrow p = q$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}{f-Divergence}
+	\begin{enumerate}
+		\item Generalization of whole family of divergences
+		\item From \href{https://en.wikipedia.org/wiki/Divergence_(statistics)}{wikipedia}: Let $P$ and $Q$ be two probability distributions over a space $\Omega$ such that $P$ is absolutely continuous with respect to $Q$. Then, for a convex function $f$ such that $f(1) = 0$, the f-divergence of $P$ from $Q$ is defined as:
+		$D_{f}(P\parallel Q)\equiv \int _{{\Omega }}f\left({\frac{dP}{dQ}}\right)\,dQ$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}{KL-Divergence}
+	\begin{enumerate}
+		\item From \href{https://en.wikipedia.org/wiki/Divergence_(statistics)}{wikipedia}:$P$ and $Q$ are probability measures over a set $X$, and $P$ is absolutely continuous with respect to $Q$, then the Kullback–Leibler divergence from $Q$ to $P$ is defined as
+		$D_{\mathrm {KL} }(P\|Q)=\int _{X}\log {\frac {dP}{dQ}}\,dP=D_{t\log}$.
+		\item maxmizing likelihood is equivalent to minimizing $D_{KL}[P(. \vert \theta^{\ast}) \, \Vert \, P(. \vert \theta)]$, where $P(. \vert \theta^{\ast})$ is the true distribution and $P(. \vert \theta)$ is our estimate
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}{Jensen–Shannon divergence}
+	From \href{https://en.wikipedia.org/wiki/Jensen–Shannon_divergence}{wikipedia}:${{\rm {JSD}}}(P\parallel Q)={\frac  {1}{2}}D(P\parallel M)+{\frac  {1}{2}}D(Q\parallel M)$, where $M={\frac  {1}{2}}(P+Q)$
+\end{definition}
+
+TODO: Wasserstein \& Wasserstein Dual
