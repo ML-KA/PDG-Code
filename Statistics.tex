@@ -87,7 +87,7 @@ A divergence on $S$ is a function $D: S \times S \rightarrow R$ satisfying
 \begin{enumerate}
 	\item The Kullback–Leibler divergence from $Q$ to $P$ is defined as\\
 	$D_{\mathrm {KL} }(P\|Q)=\int _{X}\log {\frac {dP}{dQ}}\,dP=D_{t\log t}$.
-	\item maxmizing likelihood is equivalent to minimizing $D_{KL}(P(. \vert \theta^{\ast}) \, \Vert \, P(. \vert \theta))$, where $P(. \vert \theta^{\ast})$ is the true distribution and $P(. \vert \theta)$ is our estimate.
+	\item maxmizing likelihood is equivalent to minimizing $D_{KL}(P(. \vert \theta^{\ast}) \, \Vert \, P(. \vert \theta))$ (the foreward-KL Divergence), where $P(. \vert \theta^{\ast})$ is the true distribution and $P(. \vert \theta)$ is our estimate.
 	\item \href{https://en.wikipedia.org/wiki/Kullback–Leibler_divergence}{wikipedia}
 	\item TODO: Fisher-Matrix infitesimal relationship
 \end{enumerate}
@@ -103,13 +103,13 @@ The Jensen–Shannon divergence from $Q$ to $P$ is defined as
 
 \section{Information Geometry}
 Information Geometry defines a Riemannian Manifold over probability distributions for statistical models.\\
-\subsubsection{Fisher-Rao Metric}
+\subsection{Fisher-Rao Metric}
 For the parametric family $\mathcal{P} \in \{ \mathcal{P}_\theta | \theta \in \Theta_L\}$ and every $\alpha, \beta \in \mathbb{R}^d$ with their tangent-vectors $\bar{\alpha}=dp_{\theta + t\alpha}/dt|_{t=0}$ and $\bar{\beta}=dp_{\theta + t\beta}/dt|_{t=0}$, we define the inner local product as follows:
 \begin{align*}
 	<\bar{\alpha}, \bar{\beta}> &:= \int_M\frac{\bar{\alpha}}{p_\theta}\frac{\bar{\beta}}{p_\theta}p_\theta\\
 	&=<\alpha, \mathcal{I}(\theta)\beta>\text{,}
 \end{align*}
 where $\mathcal{I}(\theta)$ is the Fisher-Information Matrix.
-\subsubsection{Natural Gradient}
+\subsection{Natural Gradient}
 The natural gradient is the gradient descent induced by the Fisher-Rao geometry of $\{\mathcal{P}_\theta \}$.\\
 \href{https://arxiv.org/abs/1711.01530}{paper}
