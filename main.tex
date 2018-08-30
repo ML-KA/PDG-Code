@@ -1,55 +1,35 @@
-\documentclass[a4paper]{article}
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
 
-%% Language and font encodings
-\usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath}
-\usepackage{tabularx}
+
+\documentclass{Dissertate}
+
+%\usepackage{amsmath}
 \usepackage{mlka_math}
-
-%% Sets page size and margins
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
-
-%% Useful packages
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage[colorinlistoftodos]{todonotes}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{neuralnetwork}
-\usepackage{sidecap}
-\usepackage{hyperref}
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemma}
-
-
 
 \title{Machine Learning Compendium}
 \author{ML-KA Karlsruhe}
 
-
-%%% --- commands ---
-
-%network notation with nonlinearities
-\include{definitions}
-
-
-
-
 \begin{document}
-\maketitle
-\begin{abstract}
-	Looking up things take time. Let's just look into one single document
-\end{abstract}
 
+% the front matter
+\input{frontmatter/personalize}
+% \copyrightpage
+\frontmatter
+
+\setstretch{\dnormalspacing}
+
+% \doublespacing
+
+% include each chapter...
 \include{ReinforcementLearning}
 \include{Statistics}
-\include{Divergences}
-\include{Inequalities}
-\include{Optimization}
+
+\setstretch{\dnormalspacing}
+
+% \clearpage
+% \bibliography{references}
+% \addcontentsline{toc}{chapter}{References}
+% \bibliographystyle{apalike2}
 
 \end{document}

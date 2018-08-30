@@ -136,3 +136,6 @@ venv.bak/
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+main.ilg
+main.sdx
+main.thm
