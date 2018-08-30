@@ -124,6 +124,8 @@
 \RequirePackage{fancyhdr}
 \RequirePackage[tiny, md, sc]{titlesec}
 \setlength{\headheight}{15pt}
+\titleformat*{\section}{\Large}
+\titleformat*{\subsection}{\large}
 \pagestyle{plain}
 \RequirePackage{titling}
 
