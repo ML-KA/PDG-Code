@@ -224,8 +224,9 @@
 	\input{frontmatter/personalize}
 	\maketitle
 	%\copyrightpage
-	\abstractpage
+    \abstractpage
     \contentspage
+    \authorspage
 	%\listoffigures % optional
 	%\dedicationpage
 	%\acknowledgments
@@ -298,6 +299,25 @@
 	\scshape \noindent \input{frontmatter/dedication}
 	\vspace*{\fill} \newpage \rm
     \cleardoublepage
+}
+
+\newcommand{\authorspage}{
+    \pdfbookmark{Authors}{Authors}
+	\newpage
+	\setcounter{page}{3}
+	\pagestyle{fancy}
+	\renewcommand{\headrulewidth}{0.0pt}
+	\vspace*{35pt}
+	\begin{center}
+    	\Large \textcolor{SchoolColor}{Authors} \normalsize \\
+         \rm
+	\end{center}
+    \begin{spacing}{\dnormalspacing}
+    	\input{frontmatter/authorlist}
+    \end{spacing}
+	\vspace*{\fill}
+	\newpage \lhead{} \rhead{}
+	\cfoot{\thepage}
 }
 
 \newcommand{\acknowledgments}{
