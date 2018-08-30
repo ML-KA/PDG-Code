@@ -7,7 +7,7 @@ Statistics is a branch of mathematics dealing with the collection, organization,
 \href{https://en.wikipedia.org/wiki/Statistics}{wikipedia}
 
 \section{Probability}
-TODO: Probability (general + simple), CDF, Variance, Fisher-Information etc.
+TODO: Probability (general + simple), CDF, Variance, etc.
 \subsection{$L_p$-Space for Random-Variables}
 The $L_p$-Norm for Random-Variables $X$, where $\mathbb{E}|X|^p < \infty$, is defined through:
 \begin{align*}
@@ -21,6 +21,15 @@ If $\phi$ is a konvex function and $X$ a Random-Variable, then
 	\phi(\mathbb{E}X) \leq \mathbb{E}\phi(X)
 \end{align*}
 \href{https://en.wikipedia.org/wiki/Jensen%27s_inequality}{wikipedia}
+
+\subsection{Fisher-Information}
+For the parametric family $\mathcal{P} \in \{ \mathcal{P}_\theta | \theta \in \Theta_L\}$...TODO\\
+If we assume $p_\theta(x,y)=p_\theta(y|x)p(x)$, the Fisher-Information Matrix $\mathcal{I}(\theta)$ becomes:
+\begin{align*}
+	\mathcal{I}(\theta) = \mathbb{E}_{(X,Y)\sim {P}_\theta}[\nabla_{\theta}\log p_{\theta}(Y|X)\otimes\nabla_{\theta}\log p_{\theta}(Y|X)]\text{,}
+\end{align*}
+where $\otimes$ is the inner-product.\\
+\href{https://arxiv.org/abs/1711.01530}{paper}
 
 \section{Distributions}
 In this section, $X$ denotes a Random Vairable and $f$ the density-function.\\
@@ -87,11 +96,20 @@ A divergence on $S$ is a function $D: S \times S \rightarrow R$ satisfying
 The Jensen–Shannon divergence from $Q$ to $P$ is defined as
 \begin{align*}
 	{{\rm {JSD}}}(P\parallel Q)={\frac  {1}{2}}D(P\parallel M)+{\frac  {1}{2}}D(Q\parallel M)
-\end{align*},\\
- where $M={\frac  {1}{2}}(P+Q)$\\
+\end{align*}, where $M={\frac  {1}{2}}(P+Q)$\\
 \href{https://en.wikipedia.org/wiki/Jensen–Shannon_divergence}{wikipedia}
 
 \subsection{TODO: Wasserstein \& Wasserstein Dual}
 
 \section{Information Geometry}
-TODO
+Information Geometry defines a Riemannian Manifold over probability distributions for statistical models.\\
+\subsubsection{Fisher-Rao Metric}
+For the parametric family $\mathcal{P} \in \{ \mathcal{P}_\theta | \theta \in \Theta_L\}$ and every $\alpha, \beta \in \mathbb{R}^d$ with their tangent-vectors $\bar{\alpha}=dp_{\theta + t\alpha}/dt|_{t=0}$ and $\bar{\beta}=dp_{\theta + t\beta}/dt|_{t=0}$, we define the inner local product as follows:
+\begin{align*}
+	<\bar{\alpha}, \bar{\beta}> &:= \int_M\frac{\bar{\alpha}}{p_\theta}\frac{\bar{\beta}}{p_\theta}p_\theta\\
+	&=<\alpha, \mathcal{I}(\theta)\beta>\text{,}
+\end{align*}
+where $\mathcal{I}(\theta)$ is the Fisher-Information Matrix.
+\subsubsection{Natural Gradient}
+The natural gradient is the gradient descent induced by the Fisher-Rao geometry of $\{\mathcal{P}_\theta \}$.\\
+\href{https://arxiv.org/abs/1711.01530}{paper}
