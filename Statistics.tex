@@ -23,7 +23,34 @@ If $\phi$ is a konvex function and $X$ a Random-Variable, then
 \href{https://en.wikipedia.org/wiki/Jensen%27s_inequality}{wikipedia}
 
 \section{Distributions}
-TODO: All the usual suspects, including observed
+In this section, $X$ denotes a Random Vairable and $f$ the density-function.\\
+TODO: More common distributions
+\subsection{Normal Distribution}
+If $X \sim {\mathcal {N}}(\mu ,\sigma ^{2})$ for ${\displaystyle \mu \in \mathbb {R}}$ and $\sigma ^{2} > 0 \in \mathbb {R}$, then:
+\begin{align*}
+	f(x) &= {\displaystyle {\frac {1}{\sqrt {2\pi \sigma ^{2}}}}e^{-{\frac {(x-\mu )^{2}}{2\sigma ^{2}}}}}\\
+	\mathbb{E}X &= \mu \\
+	Var[X] &= \sigma^2
+\end{align*}
+\href{https://en.wikipedia.org/wiki/Normal_distribution}{wikipedia}
+
+\subsection{Normal Distribution (Multivariate)}
+If $X \sim {\mathcal {N}}(\mu ,\Sigma)$ for $\mu \in \mathbb {R}^k$ and $\Sigma \in \mathbb {R}^{k \times k}$ with $\Sigma$ being positve semi-definite, then:
+\begin{align*}
+	f(x) &= \operatorname {det} (2\pi {\boldsymbol {\Sigma }})^{-{\frac {1}{2}}}\,e^{-{\frac {1}{2}}(\mathbf {x} -{\boldsymbol {\mu }})'{\boldsymbol {\Sigma }}^{-1}(\mathbf {x} -{\boldsymbol {\mu }})}\\
+	\mathbb{E}X &= \mu \\
+	Var[X] &= \Sigma
+\end{align*}
+\href{https://en.wikipedia.org/wiki/Multivariate_normal_distribution}{wikipedia}
+
+\subsection{Empirical Distribution}
+For any observation $X'=(x'_1, \cdots, x'_n)$, the empirical distribution is defined as:
+\begin{align*}
+	f(x) &= \hat{f}(x) =\frac{1}{n}\sum_{i=1}^{n}\delta(x - x_i)\text{, where $\delta$ is the dirac-delta function}\\
+	\mathbb{E}X &= \hat{\mathbb{E}}X = \frac{1}{n}\sum_{i=1}^{n}x_i \\
+	Var[X] &= \hat{Var}[X] =\frac{1}{n}\sum_{i=1}^{n}(x_i-\hat{\mathbb{E}}X)^2
+\end{align*}
+\href{http://www.stat.umn.edu/geyer/5102/slides/s1.pdf}{lecture}
 
 \section{Estimation}
 TODO: ML, Score-Function, biased/unbiased, Cramér–Rao bound, confidence-interval
