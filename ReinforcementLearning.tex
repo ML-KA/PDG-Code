@@ -71,11 +71,12 @@ Note: this is valid for all probability distributions (the policy is a distribut
 \end{enumerate}
 Agent objective function:
 \begin{align}
-	L^{\mathrm{CLIP}}_( \theta) 
+	L^{\mathrm{CLIP}}( \theta) 
 	= \EE{
 		\min(r_t(\theta) \hat{A_t}, \mathrm{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A_t}
 	}
 \end{align}
+Eventually they used many more objective terms, including an Entropy Term.
 Advantage $\hat{A_t}$ in this case means
 \begin{align}
 	\hat{A_t} &= -V(s_t) + r_t + \gamma r_{t+1} + \dots + \gamma^{T-t}V(s_T)
@@ -89,8 +90,18 @@ In a generalized form using temporal difference formulation.
 	\delta_t &= r_t + \gamma V(s_{t+1}) - V(s_t)
 \end{align}
 
+\begin{algorithm}[H]
+	\For{iteration=1,2,\dots}{
+		\For{actor=1,2, \dots}{
+			Run policy $\pi_{\theta_{\mathrm{old}}}$ in environment for $T$ timesteps\\
+			Compute advantage estimates $\hat{A_1}, \dots, \hat{A_t}$
+		}
+		Optimize surrogate $L$ wrt $\theta$, with $K$ epochs and minibatch size $M \leq NT$ \\
+		$\theta_{old} \leftarrow \theta$
+	}
+	\caption{PPO, Actor-Critic Style}
+\end{algorithm}
 
-\todo{add algorithm}
 
 \paragraph{Questions}
 \begin{enumerate}
