@@ -1,2 +1,2 @@
-# PDG-Code
-Repository for sharing Code related to the PDG
+# PDG-Compendium
+Small, concise definitions useful for machine-learning.
