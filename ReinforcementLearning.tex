@@ -1,61 +1,63 @@
-\section{Reinforcement Learning}
+\chapter{Reinforcement Learning}
+Reinforcement learning is an area of machine learning concerned with how software agents ought to take actions in an environment so as to maximize some notion of cumulative reward.
+\href{https://en.wikipedia.org/wiki/Reinforcement_learning}{wikipedia}
 
-\subsection{Bellman Equations}
+\section{Bellman Equations}
 \newcommand{\qfunc}[2]{Q_\pi(#1, #2)}
 \newcommand{\vfunc}[1]{v_\pi (#1)}
 \newcommand{\policy}[2]{\pi (#1 | #2)}
 
 TODO backup diagramms
 
-State Value Function 
+\subsection{State Value Function}
 \begin{align}
 	\vfunc{s} = \sum_{a \in A} \policy{s}{a} \qfunc{s}{a}
 \end{align}
-Action Value Function 
+\subsection{Action Value Function}
 \begin{align}
 	\qfunc{s}{a} = r_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \vfunc{s'}
 \end{align}
-State Value Function recursive
+\subsection{State Value Function recursive}
 \begin{align}
 	\vfunc{s} = \sum_{a \in A} \policy{s}{a} (r_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \vfunc{s'})
 \end{align}
-Action Value Function recursive
+\subsection{Action Value Function recursive}
 \begin{align}
 	\qfunc{s}{a} = r_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \sum_{a \in A} \policy{a'}{s'}\qfunc{s'}{a'}
 \end{align}
-Optimal State Value Function
+\subsection{Optimal State Value Function}
 \renewcommand{\qfunc}[2]{Q_{*}(#1, #2)}
 \renewcommand{\vfunc}[1]{v_{*} (#1)}
 \begin{align}
 	\vfunc{s} = \max_a \qfunc{s}{a}
 \end{align}
-Optimal Action State Value Function
+\subsection{Optimal Action State Value Function}
 \begin{align}
 	\qfunc{s}{a} = r_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \vfunc{s'}
 \end{align}
-Optimal State Value Function recursive
+\subsection{Optimal State Value Function recursive}
 \begin{align}
 	\vfunc{s} = \max\limits_a r_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \vfunc{s'}
 \end{align}
-Optimal Action State Value Function recursive
+\subsection{Optimal Action State Value Function recursive}
 \begin{align}
 	\qfunc{a}{s} = r_s^a + \gamma \sum_{s' \in S} P_{ss'}^a \max\limits_{a'} \qfunc{s'}{a'}
 \end{align}
 
 
-\subsection{Advantage Function}
+\section{Advantage Function}
 
 TODO
 
 
-\subsection{Policy, Policy Gradient}
+\section{Policy, Policy Gradient}
 
-Policy: Distribution over actions given states
+\subsection{Policy: Distribution over actions given states}
 \renewcommand{\policy}[2]{\pi_\theta (#1 | #2)}
 \begin{align}
 	\policy{a}{s} = P(a | s)
 \end{align}
-Policy Gradient
+\subsection{Policy Gradient}
 \begin{align}
 	\nabla_\theta \policy{s}{a} = \policy{s}{a} \nabla_\theta \log \policy{s}{a}
 \end{align}
