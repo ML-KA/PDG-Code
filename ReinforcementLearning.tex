@@ -7,6 +7,7 @@ Reinforcement learning is an area of machine learning concerned with how softwar
 \newcommand{\vfunc}[1]{v_\pi (#1)}
 \newcommand{\policy}[2]{\pi (#1 | #2)}
 
+\todo{RL backup diagramms}
 TODO backup diagramms
 
 \subsection{State Value Function}
@@ -47,7 +48,7 @@ TODO backup diagramms
 
 \section{Advantage Function}
 
-TODO
+\todo{Advantage Function Definition}
 
 
 \section{Policy, Policy Gradient}
@@ -102,11 +103,14 @@ In a generalized form using temporal difference formulation.
 	\caption{PPO, Actor-Critic Style}
 \end{algorithm}
 
-
-\paragraph{Questions}
-\begin{enumerate}
-	\item How does the clipping affect learning. We see higher variance towards end of training in the plots
-	\item where does the objective come from (why devide the policy values)
-	\item why conjugate gradients
-	\item How does the clipping affect the gradients
-\end{enumerate}
+\iftoggle{questions}
+{
+	\paragraph{Questions}
+	\begin{enumerate}
+		\item How does the clipping affect learning. We see higher variance towards end of training in the plots
+		\item where does the objective come from (why devide the policy values)
+		\item why conjugate gradients
+		\item How does the clipping affect the gradients
+	\end{enumerate}
+}{
+}
