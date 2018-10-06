@@ -212,6 +212,11 @@
 \definecolor{SchoolColor}{rgb}{0.6471, 0.1098, 0.1882} % Crimson
 \definecolor{chaptergrey}{rgb}{0.6471, 0.1098, 0.1882} % for chapter numbers
 
+\definecolor{matching1}{HTML}{465362}
+\definecolor{matching2}{HTML}{82A3A1}
+\definecolor{matching3}{HTML}{9FC490}
+\definecolor{matching4}{HTML}{C0DFA1}
+
 \hypersetup{
     colorlinks,
     citecolor=SchoolColor,

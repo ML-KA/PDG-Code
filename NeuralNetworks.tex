@@ -1,0 +1,249 @@
+\chapter{Neural Network}
+Artificial neural networks (ANN) or connectionist systems are computing systems vaguely inspired by the biological neural networks that constitute animal brains.
+\href{https://en.wikipedia.org/wiki/Artificial_neural_network}{wikipedia}
+TODO: lot of stuff
+
+\section{Architecture}
+TODO: Perceptron, Fully-Connected, Convolutional, Autoencoder, LSTM etc.
+
+\newcommand{\activationDec}[6]{
+\subsection{#1}
+#2
+\begin{samepage}
+\begin{tabular}{ l | r }
+    \Centering definition & \Centering{derivative} \\\hline
+    $f(x) = #3$ & $f'(x)=#4$\\
+\end{tabular}\\
+\begin{tikzpicture}
+    \begin{axis}[
+        xmin=-3, xmax=3,
+        ymin=-3, ymax=3,
+        ytick={-3,-2,...,3},
+        cycle list name=color-scheme,
+        axis lines = left,
+        extra x ticks={0},
+        extra y ticks={0},
+        extra tick style={grid=major},
+        every axis plot/.append style={ultra thick}
+    ]
+    %Here the blue parabloa is defined
+    #6
+    \addlegendentry{$f'(x)$}
+    %Below the red parabola is defined
+    #5
+    \addlegendentry{$f(x)$}
+     
+    \end{axis}
+\end{tikzpicture}
+\end{samepage}
+\filbreak
+}
+\newcommand{\activation}[5]{
+    \activationDec{#1}{}{#2}{#3}{#4}{#5}
+}
+
+\newcommand{\activationsimple}[5]{
+    \activation{#1}{#2}{#3}{
+        \addplot [
+            domain=-3:3, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {(#4)};
+    }
+    {
+        \addplot [
+            domain=-3:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {(#5)};
+    }
+}
+
+\activationsimple{Identity}{x}{1}{x}{1}
+\activation{Heav-Step function}
+    {\begin{cases} 
+        1 & x \geq 0 \\
+        0 & else 
+     \end{cases}}
+    {
+     0
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {0};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {1};
+    }
+    {
+        \addplot [
+            domain=-3:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {0};
+    }
+\activationsimple{Logistic}
+    {\frac{1}{1+e^{-x}}}{\frac{e^{-x}}{(e^{-x} + 1)^2}=f(x)(1-f(x))}
+    {1/(1+e^(-x)}{e^(-x)/((e^(-x) + 1)^2)}
+\activation{ReLu}
+    {max(0,x)}
+    {
+     \begin{cases} 
+        1 & x \geq 0 \\
+        0 & else 
+     \end{cases}
+    }
+    {
+        \addplot [
+            domain=-3:3, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {max(0,x)};
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=matching1
+        ]
+        {0};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {1};
+    }
+\activation{Leaky ReLu}
+    {\begin{cases} 
+        x & x \geq 0 \\
+        0.01x & else 
+     \end{cases}}
+    {
+     \begin{cases} 
+        1 & x \geq 0 \\
+        0.01 & else 
+     \end{cases}
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {0.01*x};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {x};
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=matching1
+        ]
+        {0.01};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {1};
+    }
+\activationsimple{Tanh}
+    {tanh(x)}{1-tanh(x)^2}
+    {tanh(x)}{1-tanh(x)^2}
+\activationDec{ELU}
+    {the examples are plottet for $\alpha=0.7$.\\}
+    {\begin{cases} 
+        \alpha(e^{x}-1) & x \geq 0 \\
+        x & else 
+     \end{cases}}
+    {\begin{cases} 
+        1 & x \geq 0 \\
+        \alpha*e^{x}=f(x) + \alpha & else 
+     \end{cases}
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {0.7*(e^(x)-1)};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {x};
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=matching1
+        ]
+        {0.7*(e^(x))};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {1};
+    }
+\activationDec{SELU}
+    {
+        Scaled Exponential Linear Unit (SELU) is the Exponetial Linear Unit (ELU) activation function, where $\lambda$ and $\alpha$ have been fixed to $1.0507$ and $1.67326$. Neural Networks using the SELU form Self-Normalizing Neural Networks. See the \href{https://arxiv.org/abs/1706.02515}{paper} for more information.\\
+    }
+    {\lambda \begin{cases} 
+        \alpha(e^{x}-1) & x \geq 0 \\
+        x & else 
+     \end{cases}}
+    {\lambda \begin{cases} 
+        1 & x \geq 0 \\
+        \alpha*e^{x}=f(x) + \alpha & else 
+     \end{cases}
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {1.0507*1.67326*(e^(x)-1)};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=SchoolColor
+        ]
+        {1.0507*x};
+    }
+    {
+        \addplot [
+            domain=-3:0, 
+            samples=100, 
+            color=matching1
+        ]
+        {1.0507*1.67326*(e^(x))};
+        \addplot [
+            domain=0:3, 
+            samples=100, 
+            color=matching1
+        ]
+        {1.0507};
+    }
