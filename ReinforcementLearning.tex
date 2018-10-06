@@ -7,6 +7,7 @@ Reinforcement learning is an area of machine learning concerned with how softwar
 \newcommand{\vfunc}[1]{v_\pi (#1)}
 \newcommand{\policy}[2]{\pi (#1 | #2)}
 
+\todo{RL backup diagramms}
 TODO backup diagramms
 
 \subsection{State Value Function}
@@ -47,7 +48,7 @@ TODO backup diagramms
 
 \section{Advantage Function}
 
-TODO
+\todo{Advantage Function Definition}
 
 
 \section{Policy, Policy Gradient}
@@ -62,3 +63,54 @@ TODO
 	\nabla_\theta \policy{s}{a} = \policy{s}{a} \nabla_\theta \log \policy{s}{a}
 \end{align}
 Note: this is valid for all probability distributions (the policy is a distribution over actions given states). The gradient term on the right hand side is called score function. The derivation basically uses the "log-trick".
+
+
+\subsection{Proximal Policy Optimization PPO}
+\newcommand{\oldpolicy}[2]{\pi_{\theta_{\mathrm{old}}} ( {#1} | {#2})}
+\begin{enumerate}
+	\item \url{https://arxiv.org/abs/1707.06347}. 
+\end{enumerate}
+Agent objective function:
+\begin{align}
+	L^{\mathrm{CLIP}}( \theta) 
+	= \EE{
+		\min(r_t(\theta) \hat{A_t}, \mathrm{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A_t}
+	}
+\end{align}
+Eventually they used many more objective terms, including an Entropy Term.
+Advantage $\hat{A_t}$ in this case means
+\begin{align}
+	\hat{A_t} &= -V(s_t) + r_t + \gamma r_{t+1} + \dots + \gamma^{T-t}V(s_T)
+\end{align}
+If the advantage is positive, then the estimated value of the currente state $s_t$ is smaller then what you actually got
+as rewards a couple time steps later. Your estimated state value was too low then.
+If the advantage is negative, the estimate was too high.
+In a generalized form using temporal difference formulation.
+\begin{align}
+	\hat{A_t} &= \delta_t + (\gamma \lambda)\delta_{t+1} + \dots + (\gamma\lambda)^{T-t+1}\delta_{T-1} \\
+	\delta_t &= r_t + \gamma V(s_{t+1}) - V(s_t)
+\end{align}
+
+\begin{algorithm}[H]
+	\For{iteration=1,2,\dots}{
+		\For{actor=1,2, \dots}{
+			Run policy $\pi_{\theta_{\mathrm{old}}}$ in environment for $T$ timesteps\\
+			Compute advantage estimates $\hat{A_1}, \dots, \hat{A_t}$
+		}
+		Optimize surrogate $L$ wrt $\theta$, with $K$ epochs and minibatch size $M \leq NT$ \\
+		$\theta_{old} \leftarrow \theta$
+	}
+	\caption{PPO, Actor-Critic Style}
+\end{algorithm}
+
+\iftoggle{questions}
+{
+	\paragraph{Questions}
+	\begin{enumerate}
+		\item How does the clipping affect learning. We see higher variance towards end of training in the plots
+		\item where does the objective come from (why devide the policy values)
+		\item why conjugate gradients
+		\item How does the clipping affect the gradients
+	\end{enumerate}
+}{
+}
