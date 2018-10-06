@@ -6,6 +6,16 @@
 
 %\usepackage{amsmath}
 \usepackage{mlka_math}
+\usepackage{pgfplots}
+\usetikzlibrary{matrix}
+
+\pgfplotscreateplotcyclelist{color-scheme}{
+{SchoolColor},
+{matching1},
+{matching2},
+{matching3},
+{matching4},
+}
 
 %\usepackage[english]{babel}
 %\usepackage[utf8x]{inputenc}
@@ -42,8 +52,9 @@
 % \doublespacing
 
 % include each chapter...
-\include{ReinforcementLearning}
 \include{Statistics}
+\include{NeuralNetworks}
+\include{ReinforcementLearning}
 
 \setstretch{\dnormalspacing}
 

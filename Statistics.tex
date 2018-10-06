@@ -8,7 +8,14 @@ Statistics is a branch of mathematics dealing with the collection, organization,
 \href{https://en.wikipedia.org/wiki/Statistics}{wikipedia}
 
 \section{Probability}
-TODO: Probability (general + simple), CDF, Variance, Markov-Property, etc.
+TODO: Probability (general + simple), CDF, Variance, Markov-Property, stationarity, etc.
+
+
+\subsection{Statistic}
+A statistic is a function of a sample where the function itself is independent of the sample's distribution; that is, the function can be stated before realization of the data. The term statistic is used both for the function and for the value of the function on a given sample.
+\href{https://en.wikipedia.org/wiki/Statistic}{wikipedia}
+
+
 \subsection{$L_p$-Space for Random-Variables}
 The $L_p$-Norm for Random-Variables $X$, where $\mathbb{E}|X|^p < \infty$, is defined through:
 \begin{align*}
@@ -63,7 +70,67 @@ For any observation $X'=(x'_1, \cdots, x'_n)$, the empirical distribution is def
 \href{http://www.stat.umn.edu/geyer/5102/slides/s1.pdf}{lecture}
 
 \section{Estimation}
-TODO: ML, Score-Function, biased/unbiased, Cramér–Rao bound, confidence-interval
+TODO: biased/unbiased, consistent, sufficient, Cramér–Rao bound, confidence-interval
+
+\subsection{Estimator}
+Examples:
+\begin{enumerate}
+	\item \textit{point estimation:}\\ The application of a point estimator (a statistic) to the data to obtain a point estimate. In Machine-Learning, estimating the parameters of neural networks is usually done via (a multidimensional) point-estimation. \href{https://en.wikipedia.org/wiki/Point_estimation}{wikipedia}
+	\item \textit{Interval estimation:}\\ interval estimation is the use of sample data to calculate an interval of plausible values of an unknown population parameter.\href{https://en.wikipedia.org/wiki/Interval_estimation}{wikipedia}
+	\item \textit{clustering:}\\ Grouping data into sets of similiar objects.
+	\item \textit{classification:}\\ Assigning Categories to data-objects.
+\end{enumerate}
+
+\subsection{Score Function}
+\begin{enumerate}
+	\item indicates how sensitive a likelihood function $\displaystyle {\mathcal {L}}(\theta ;X)$ is to its parameter $\theta$.
+	\item it is defined as:
+	\begin{align*}
+		u_\theta(x)=\frac{\partial}{\partial \theta}ln \mathcal{L}(\theta \mid x)\,
+	\end{align*}
+	where $\mathcal{L}$ is a likelihood-function.
+\end{enumerate}
+\href{https://en.wikipedia.org/wiki/Score_(statistics)}{wikipedia}
+
+\subsection{Likelihood}
+\begin{enumerate}
+	\item A likelihood function (often simply the likelihood) is a function of the parameters of a statistical model, given specific observed data
+	\item Common definitions:
+	\begin{enumerate}
+		\item \textit{parameterized model}\\
+		Given a parameterized family of probability density functions (or probability mass functions in the case of discrete distributions) $x\mapsto f(x\mid\theta)$, where $\theta$ is the parameter, the likelihood function is 
+		\begin{align*}
+			\theta\mapsto f(x\mid\theta)
+		\end{align*}
+		, written
+		\begin{align*}
+		\mathcal{L}(\theta \mid x)=f(x\mid\theta)\,
+		\end{align*}
+		where $x$ is the observed outcome of an experiment.
+
+		\item \textit{In general}\\
+		The likelihood function is this density interpreted as a function of the parameter (possibly a vector), not of the possible outcomes. This provides a likelihood function for any probability model with all distributions, whether discrete, absolutely continuous, a mixture or something else.
+	\end{enumerate}
+	\item \textit{Log-likelihood:}\\
+	It's usually convenient to work with the log-likelihood, especially if multiple, indipendent random variables are involed.
+\end{enumerate}
+\href{https://en.wikipedia.org/wiki/Likelihood_function}{wikipedia}
+
+
+\subsection{Maximum-Likelihood Estimator}
+\begin{enumerate}
+	\item Maximum likelihood estimation (MLE) attempts to find the parameter values that maximize the likelihood function, given the observations.
+	\item \textit{frequentist inference:} MLE is one of several methods to get estimates of parameters without using prior distributions.
+\end{enumerate}
+Some properties:
+\begin{enumerate}
+	\item \textit{Consistency:} the sequence of MLEs converges in probability to the value being estimated.
+	\item \textit{Efficiency:} it achieves the Cramér–Rao lower bound when the sample size tends to infinity. This means that no consistent estimator has lower asymptotic mean squared error than the MLE (or other estimators attaining this bound).
+	\item \textit{Second-order efficiency} after correction for bias.
+\end{enumerate}
+\href{https://en.wikipedia.org/wiki/Divergence_(statistics)}{wikipedia}
+
+
 
 \section{Divergences}
 Conventions for this section: $P$ and $Q$ are probability measures over a set $X$, and $P$ is absolutely continuous with respect to $Q$. $S$ is a space of all probability distributions with common support.
@@ -100,7 +167,29 @@ The Jensen–Shannon divergence from $Q$ to $P$ is defined as
 \end{align*}, where $M={\frac  {1}{2}}(P+Q)$\\
 \href{https://en.wikipedia.org/wiki/Jensen–Shannon_divergence}{wikipedia}
 
-\subsection{TODO: Wasserstein \& Wasserstein Dual}
+\subsection{Wasserstein Metric}
+\begin{enumerate}
+	\item Also often called Earth-Mover's distance (EDM)
+	\item It differs from the usual KL-Divergence in that it's based on optimal-transport and not on local probability differences
+\end{enumerate}
+Let $(M,d)$ be a metric space with every probability measure on $M$ being a Radon measure (a so-called Radon space). For $p\geq 1$, let $\displaystyle P_{p}(M)$ denote the collection of all probability measures $\mu$ on $M$ with finite $\displaystyle p^{\text{th}}$ moment for some $x_{0}$ in $M$.
+\subsubsection{Wasserstein Metric - Primal}
+The $\displaystyle p^{\text{th}}$ Wasserstein distance between two probability measures $\mu$ and $\nu$ in $\displaystyle P_{p}(M)$ is defined as
+\begin{align*}
+W_{{p}}(\mu ,\nu ):=\left(\inf _{{\gamma \in \Gamma (\mu ,\nu )}}\int _{{M\times M}}d(x,y)^{{p}}\,{\mathrm  {d}}\gamma (x,y)\right)^{{1/p}}
+\end{align*},
+where $\displaystyle \Gamma (\mu ,\nu )$ denotes the collection of all measures on $M\times M$ with marginals $\mu$  and $\nu$. ($\Gamma (\mu ,\nu )$ is also called the set of all couplings of $\mu$  and $\nu$ .)
+\subsubsection{Wasserstein Metric - Dual}
+The following dual representation of $W_1$ is a special case of the duality theorem of Kantorovich and Rubinstein (1958): when $\mu$ and $\nu$ have bounded support,
+\begin{align*}
+W_{{1}}(\mu ,\nu )=\sup \left\{\left.\int _{{M}}f(x)\,{\mathrm  {d}}(\mu -\nu )(x)\right|{\mbox{continuous }}f:M\to {\mathbb  {R}},{\mathrm  {Lip}}(f)\leq 1\right\}
+\end{align*},
+where $Lip(f)$ denotes the minimal Lipschitz constant for $f$.\\
+If the metric $d$ is bounded by some constant $C$, then $2W_{{1}}(\mu ,\nu )\leq C\rho (\mu ,\nu )$,
+and so convergence in the Radon metric (identical to total variation convergence when M is a Polish space) implies convergence in the Wasserstein metric, but not vice versa.\\
+This article uses material from the Wikipedia article
+\href{https://en.wikipedia.org/wiki/Wasserstein_metric}{Wasserstein metric} which is released under the \href{https://creativecommons.org/licenses/by-sa/3.0/}{Creative Commons Attribution-Share-Alike License 3.0}.\\
+Good introductionary blog-post: \href{https://vincentherrmann.github.io/blog/wasserstein/}{wasserstein}.
 
 \section{Information Geometry}
 Information Geometry defines a Riemannian Manifold over probability distributions for statistical models.\\
